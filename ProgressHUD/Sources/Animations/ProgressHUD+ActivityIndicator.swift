@@ -11,21 +11,17 @@
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+// MARK: - Activity Indicator
+extension ProgressHUD {
 
-	var window: UIWindow?
-
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-
-		window = UIWindow(frame: UIScreen.main.bounds)
-
-		let viewController = ViewController(nibName: "ViewController", bundle: nil)
-		let navController = NavigationController(rootViewController: viewController)
-
-		window?.rootViewController = navController
-		window?.makeKeyAndVisible()
-
-		return true
+	func animationActivityIndicator(_ view: UIView, _ color: UIColor) {
+		let spinner = UIActivityIndicatorView(style: .large)
+		let scale = view.frame.size.width / spinner.frame.size.width
+		spinner.transform = CGAffineTransform(scaleX: scale, y: scale)
+		spinner.frame = view.bounds
+		spinner.color = color
+		spinner.hidesWhenStopped = true
+		spinner.startAnimating()
+		view.addSubview(spinner)
 	}
 }
